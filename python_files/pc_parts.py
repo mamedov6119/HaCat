@@ -35,4 +35,26 @@ def CreatePcPart():
     return dumps({"Success" : 1})
     
 
+@app.route("/api/update_pc_part/<id>", methods=["POST"])
+def UpdatePcPart(id):
+    data = request.json
+    col.update_one( {"_id" : ObjectId(id)},
+        {
+        "$set": 
+            {
+                "name" : data["name"], 
+                "category" : data["category"], 
+                "price" : data["price"]
+            }
+        }
+    )
 
+    return dumps({"Success" : 1})
+
+
+@app.route("/api/del_pc_part/<id>", methods=["DELETE"])
+def DeletePcPart(id):
+
+    col.delete_one( {"_id" : ObjectId(id)} )
+
+    return dumps({"Success" : 1})
