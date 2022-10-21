@@ -29,7 +29,7 @@ import users_coll, pc_parts # function from users @app.route("/<name>") def user
 
 
 if __name__ == "__main__":
-    app.run(host="192.168.0.217", port=5000, debug=True)
+    app.run(port=8080, debug=True)
 
 
 
