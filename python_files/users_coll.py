@@ -43,7 +43,7 @@ def AllUsers():
         return []
 
 #POST
-@app.route("/api/create_user/", methods=["POST"])
+@app.route("/api/create_user", methods=["POST"])
 def CreateUser():
     data = request.json
     col.insert_one( {
@@ -51,17 +51,13 @@ def CreateUser():
         "email" : data["email"],
         "password" : data["password"],
         "admin" : data["admin"]
-
-    } )
-
+    })
     return dumps({"Success" : 1})
 
 #DELETE
 @app.route("/api/del_by_id/<id>", methods=["DELETE"])
 def DeleteUser(id):
-
     col.delete_one( {"_id" : ObjectId(id)} )
-
     return dumps({"Success" : 1})
 
 #GET

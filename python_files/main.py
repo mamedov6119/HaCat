@@ -15,12 +15,14 @@ col = db["users"]
 
 
 app = Flask(__name__)
-CORS(app, support_credentials=True)
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    response.headers.add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
     return response
 
 
@@ -29,7 +31,7 @@ import users_coll, pc_parts # function from users @app.route("/<name>") def user
 
 
 if __name__ == "__main__":
-    app.run(port=8080, debug=True)
+    app.run(host="127.0.0.1", port=5000, debug=True)
 
 
 
