@@ -19,10 +19,10 @@
   <ul class="list-group px-4">
     <li class="list-group-item list-group-item-action text-start" v-for="(user,index) in users" v-bind:key="index" v-on:click="removeUser($event, user._id.$oid)">
         <div class="row">
-          <div class="col-8">
+          <div class="col-6">
             <p>Name: <b class="text-start">{{user.name}}</b></p>
           </div>
-          <div class="col-4">
+          <div class="col-6">
             <p class="text-end text-muted">id: {{user._id.$oid}}</p>
           </div>
         </div>
@@ -44,11 +44,12 @@ export default {
   },
   methods: {
     async updateUsers() {
-      this.users = await axios.get('http://localhost:5000/api/all_users/').then(a => a.data)
+      this.users = await axios.get('http://localhost:9000/api/all_users/').then(a => a.data)
+      console.log(this.users)
     },
     async newUser(e) {
       e.preventDefault()
-      await axios.post('http://localhost:5000/api/create_user', {
+      await axios.post('http://localhost:9000/api/create_user', {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
         password: document.getElementById('password').value,
@@ -58,7 +59,7 @@ export default {
     },
     async removeUser(e, id) {
       e.preventDefault();
-      await axios.delete('http://localhost:5000/api/del_by_id/'+id);
+      await axios.delete('http://localhost:9000/api/del_by_id/'+id);
       this.updateUsers()
     }
   }
