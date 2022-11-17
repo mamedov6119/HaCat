@@ -43,7 +43,7 @@ def AllUsers():
         return []
 
 #POST
-@app.route("/api/create_user", methods=["POST"])
+@app.route("/api/create_user", methods=["POST"]) 
 def CreateUser():
     data = request.json
     col.insert_one( {
