@@ -12,14 +12,14 @@
     <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
       <form class="p-2">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <label for="login_email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="login_email" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <label for="login_password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="login_password">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" @click="login">Submit</button>
       </form> 
     </div>
     <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
@@ -47,15 +47,35 @@
 import axios from 'axios';
 export default {
   name: 'LoginPage',
+  created() {
+    if (localStorage.getItem('user')) {
+      this.$router.push({name: 'home'})
+    }
+  },
   methods: {
     async newUser(e) {
       e.preventDefault()
-      await axios.post('http://localhost:5000/api/create_user', {
+      await axios.post('http://localhost:9000/api/create_user', {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
         password: document.getElementById('password').value,
         admin: 0
       })
+    },
+    async login(e) {
+      e.preventDefault()
+      let email = document.getElementById('login_email').value;
+      let password = document.getElementById('login_password').value;
+      let result = await axios.get('http://localhost:9000/api/login/' + email + '/' + password, {})
+      if (result.data.length > 0) {
+        let user = { id: result.data[0].id, name: result.data[0].name, email: result.data[0].email, admin: result.data[0].admin }
+        localStorage.setItem('user', JSON.stringify(user))
+        console.log(localStorage.getItem('user'))
+        alert('Login successful')
+        this.$router.go()
+      } else {
+        alert('Invalid login')
+      } 
     }
   }
 }

@@ -6,7 +6,7 @@ import LoginPage from './components/LoginPage.vue'
 import UsersPage from './components/UsersPage.vue'
 
 const routes = [
-  { path: '/', component: HelloWorld },
+  { path: '/', component: HelloWorld, name: 'home' },
   { path: '/login', component: LoginPage },
   { path: '/users', component: UsersPage },
 ]

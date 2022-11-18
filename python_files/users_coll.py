@@ -36,7 +36,7 @@ def CreateUser():
     response = make_response(dumps({"Success" : 0}))
     try:
         data = request.json
-        col.insert_one( {
+        col.insert_one({
             "name" : data["name"],
             "email" : data["email"],
             "password" : data["password"],

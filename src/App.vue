@@ -2,7 +2,9 @@
   <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
       <router-link to="/" class="navbar-brand">Home</router-link>
-      <img src="./assets/white.png" alt="">
+      <router-link to="/">
+        <img src="./assets/white.png" alt="">
+      </router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -17,14 +19,17 @@
               <router-link class="nav-link" to="/">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/users">Users</router-link>
+              <router-link class="nav-link" to="/users"  v-if="isAdmin">Users</router-link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="isUser">
+              <a class="nav-link" @click="logout">Logout</a>
+              </li>
+            <li class="nav-item" v-else>
               <router-link class="nav-link" to="/login">Login</router-link>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
+            <li class="nav-item dropdown" v-if="isAdmin">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                Administation Tools
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
                 <li><a class="dropdown-item" href="#">Action</a></li>
@@ -36,10 +41,7 @@
               </ul>
             </li>
           </ul>
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-success" type="submit">Search</button>
-          </form>
+          
         </div>
       </div>
     </div>
@@ -51,7 +53,26 @@
 
 export default {
   name: 'App',
-  components: {}
+  components: {},
+  data() {
+    return {
+      isAdmin: false,
+      isUser: window.localStorage.getItem('user') != null
+    }
+  },
+  created(){
+    if(this.isUser){
+      this.isAdmin = JSON.parse(window.localStorage.getItem('user')).admin == 1
+    }
+  },
+  methods: {
+    logout() {
+      window.localStorage.removeItem('user')
+      this.isUser = false
+      alert('You have been logged out')
+      this.$router.go()
+    }
+  }
 }
 </script>
 
