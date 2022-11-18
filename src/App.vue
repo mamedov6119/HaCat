@@ -32,7 +32,7 @@
                 Administation Tools
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><router-link to="/components" class="dropdown-item" >Add Components</router-link></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li>
                   <hr class="dropdown-divider">

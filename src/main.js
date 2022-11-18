@@ -4,11 +4,14 @@ import App from './App.vue'
 import HelloWorld from './components/HelloWorld.vue'
 import LoginPage from './components/LoginPage.vue'
 import UsersPage from './components/UsersPage.vue'
+import AddComponents from './components/AddComponents.vue'
+
 
 const routes = [
   { path: '/', component: HelloWorld, name: 'home' },
-  { path: '/login', component: LoginPage },
-  { path: '/users', component: UsersPage },
+  { path: '/login', component: LoginPage, name: 'login' },
+  { path: '/users', component: UsersPage,  name: 'users' },
+  { path: '/components', component: AddComponents, name: 'components' },
 ]
   
   const router = createRouter({
