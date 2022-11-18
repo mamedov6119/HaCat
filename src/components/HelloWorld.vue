@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1 class="text-center">Welcome to the site </h1>
+        <h1 class="text-center">Welcome to the site <span style="color:blue; -webkit-text-stroke: .5px black ;">{{name}}</span></h1>
       </div>
     </div>
     <div class="row">
@@ -16,7 +16,17 @@
 <script>
 export default {
   name: 'HelloWorld',
-  props: {}
+  props: {},
+  data() {
+    return {
+      name: ''
+    }
+  },
+  created() {
+    if(window.localStorage.getItem('user') != null){
+      this.name = JSON.parse(window.localStorage.getItem('user')).name
+    }
+  }
 }
 </script>
 
