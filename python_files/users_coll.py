@@ -45,7 +45,7 @@ def CreateUser():
         response = make_response(dumps({"Success" : 1}))
         response.status_code = 200
     except:
-        response.status_code = 201
+        response.status_code = 400
     response.headers.add("Access-Control-Allow-Origin", "*")
     response.headers.add("Access-Control-Allow-Headers", "*")
     response.headers.add("Access-Control-Allow-Methods", "*")
@@ -61,7 +61,7 @@ def DeleteUser(id):
         response = make_response(dumps({"Success" : 1}))
         response.status_code = 200
     except:
-        response.status_code = 201
+        response.status_code = 400
     response.headers.add("Access-Control-Allow-Origin", "*")
     response.headers.add("Access-Control-Allow-Headers", "*")
     response.headers.add("Access-Control-Allow-Methods", "*")
