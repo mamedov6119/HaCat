@@ -69,7 +69,7 @@ def build_pc_rand(price):
 
         # cpu cooler 
         user_cpu_cooler = select_rand (cpu_cooler) 
-        result['cpu cooler'] = user_cpu_cooler
+        result['cpu_cooler'] = user_cpu_cooler
         price -= float(user_cpu_cooler["price_usd"])
 
         # cpu cooler
