@@ -21,6 +21,7 @@
         <div class="row">
           <div class="col-6">
             <p>Name: <b class="text-start">{{user.name}}</b></p>
+            <p>Rights: <b class="text-start">{{user.admin == 0 ? "Regular User" : "Admin user"}}</b></p>
           </div>
           <div class="col-6">
             <p class="text-end text-muted">id: {{user._id.$oid}}</p>
