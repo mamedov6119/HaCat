@@ -40,151 +40,10 @@ def build_pc_rand(price):
     response = make_response(dumps({"Success": 0}))
     try:
         
-        result ={}
-        price = float(price)
-
-
-
-        # case accessory
-        user_case_accessory = select_rand(case_accessory)
-        result['case_accessory'] = user_case_accessory
-        price -= float(user_case_accessory["price_usd"])
-        
-        
-        # case accessory
-       
-        # case fan
-        user_case_fan = select_rand(case_fan)
-        result['case_fan'] = user_case_fan
-        price -= float(user_case_fan["price_usd"])
-
-        # case fan 
-
-        # case
-        user_case = select_rand (case)
-        result['case'] = user_case
-        price -= float(user_case["price_usd"])
-
-        # case
-
-        # cpu cooler 
-        user_cpu_cooler = select_rand (cpu_cooler) 
-        result['cpu_cooler'] = user_cpu_cooler
-        price -= float(user_cpu_cooler["price_usd"])
-
-        # cpu cooler
-
-        # cpu
-        user_cpu = select_rand (cpu)
-        result['cpu'] = user_cpu
-        price -= float(user_cpu["price_usd"])
-       
-        # cpu
-
-        # user video card
-        user_video_card = select_rand (video_card)
-        result['video_card'] = user_video_card
-        price -= float(user_video_card["price_usd"])
-
-        # user video card
-
-        # external hard drive
-        user_external_hard_drive = select_rand (external_hard_drive)
-        result['external_hard_drive'] = user_external_hard_drive
-        price -= float(user_external_hard_drive["price_usd"])
-
-        # external hard drive
-
-        # headphones
-        user_headphones = select_rand (heaphones)
-        result['headphones'] = user_headphones
-        price -= float(user_headphones["price_usd"])
-
-        # headphones
-
-        # internal hard drive
-        user_internal_hard_drive = select_rand (internal_hard_drive)
-        result['internal_hard_drive'] = user_internal_hard_drive
-        price -= float(user_internal_hard_drive["price_usd"])
-
-        # internal hard drive
-
-        # keyboard
-        user_keyboard = select_rand (keyboards)
-        result['keyboard'] = user_keyboard
-        price -= float(user_keyboard["price_usd"])
-
-        # keyboard 
-
-        # memory
-        user_memory = select_rand (memory)
-        result['memory'] = user_memory
-        price -= float(user_memory["price_usd"])
-        
-        # memory
-
-        # monitor
-        user_monitor = select_rand (monitor)
-        result['monitor'] = user_monitor
-        price -= float(user_monitor["price_usd"])
-
-        # monitor
-
-        # motherboard
-        user_motherboard = select_rand (motherboard)
-        result['motherboard'] = user_motherboard
-        price -= float(user_motherboard["price_usd"])
-
-        # motherboard
-
-        # mouse
-        user_mouse = select_rand (mouse)
-        result['mouse'] = user_mouse
-        price -= float(user_mouse["price_usd"])
-
-        # mouse
-
-        # power supply
-        user_power_supply = select_rand (power_supply)
-        result['power_supply'] = user_power_supply
-        price -= float(user_power_supply["price_usd"])
-
-        # power supply
-
-        # speakers
-        user_speakers = select_rand (speakers)
-        result['speakers'] = user_speakers
-        price -= float(user_speakers["price_usd"])
-
-        # speakers
-
-        # thermal paste
-        user_thermal_paste = select_rand (thermal_paste)
-        result['thermal_paste'] = user_thermal_paste
-        price -= float(user_thermal_paste["price_usd"])
-
-        # thermal paste
-
-        # webcam
-        user_webcam = select_rand (webcam)
-        result['webcam'] = user_webcam
-        price -= float(user_webcam["price_usd"])
-
-        # webcam
-
-        # wireless network card
-        user_wireless_network_card = select_rand (wireless_network_card)
-        result['wireless_network_card'] = user_wireless_network_card
-        price -= float(user_wireless_network_card["price_usd"])
-
-        # wireless network card
-
-
-
-
-
-
-        response = make_response(dumps({"Money_left": price, "data": result}))
+        result = create(price)
+        while (result["Money_left"] * -1 > 3500):
+            result = create(price)
+        response = make_response(dumps(result))
         response.status_code = 200
     except Exception as e:
         print(e)
@@ -193,6 +52,147 @@ def build_pc_rand(price):
     response.headers.add("Access-Control-Allow-Headers", "*")
     response.headers.add("Access-Control-Allow-Methods", "*")
     return response
+
+def create(price):
+    result ={}
+    price = float(price)
+
+
+
+    # case accessory
+    user_case_accessory = select_rand(case_accessory)
+    result['case_accessory'] = user_case_accessory
+    price -= float(user_case_accessory["price_usd"])
+    
+    
+    # case accessory
+    
+    # case fan
+    user_case_fan = select_rand(case_fan)
+    result['case_fan'] = user_case_fan
+    price -= float(user_case_fan["price_usd"])
+
+    # case fan 
+
+    # case
+    user_case = select_rand (case)
+    result['case'] = user_case
+    price -= float(user_case["price_usd"])
+
+    # case
+
+    # cpu cooler 
+    user_cpu_cooler = select_rand (cpu_cooler) 
+    result['cpu_cooler'] = user_cpu_cooler
+    price -= float(user_cpu_cooler["price_usd"])
+
+    # cpu cooler
+
+    # cpu
+    user_cpu = select_rand (cpu)
+    result['cpu'] = user_cpu
+    price -= float(user_cpu["price_usd"])
+    
+    # cpu
+
+    # user video card
+    user_video_card = select_rand (video_card)
+    result['video_card'] = user_video_card
+    price -= float(user_video_card["price_usd"])
+
+    # user video card
+
+    # external hard drive
+    user_external_hard_drive = select_rand (external_hard_drive)
+    result['external_hard_drive'] = user_external_hard_drive
+    price -= float(user_external_hard_drive["price_usd"])
+
+    # external hard drive
+
+    # headphones
+    user_headphones = select_rand (heaphones)
+    result['headphones'] = user_headphones
+    price -= float(user_headphones["price_usd"])
+
+    # headphones
+
+    # internal hard drive
+    user_internal_hard_drive = select_rand (internal_hard_drive)
+    result['internal_hard_drive'] = user_internal_hard_drive
+    price -= float(user_internal_hard_drive["price_usd"])
+
+    # internal hard drive
+
+    # keyboard
+    user_keyboard = select_rand (keyboards)
+    result['keyboard'] = user_keyboard
+    price -= float(user_keyboard["price_usd"])
+
+    # keyboard 
+
+    # memory
+    user_memory = select_rand (memory)
+    result['memory'] = user_memory
+    price -= float(user_memory["price_usd"])
+    
+    # memory
+
+    # monitor
+    user_monitor = select_rand (monitor)
+    result['monitor'] = user_monitor
+    price -= float(user_monitor["price_usd"])
+
+    # monitor
+
+    # motherboard
+    user_motherboard = select_rand (motherboard)
+    result['motherboard'] = user_motherboard
+    price -= float(user_motherboard["price_usd"])
+
+    # motherboard
+
+    # mouse
+    user_mouse = select_rand (mouse)
+    result['mouse'] = user_mouse
+    price -= float(user_mouse["price_usd"])
+
+    # mouse
+
+    # power supply
+    user_power_supply = select_rand (power_supply)
+    result['power_supply'] = user_power_supply
+    price -= float(user_power_supply["price_usd"])
+
+    # power supply
+
+    # speakers
+    user_speakers = select_rand (speakers)
+    result['speakers'] = user_speakers
+    price -= float(user_speakers["price_usd"])
+
+    # speakers
+
+    # thermal paste
+    user_thermal_paste = select_rand (thermal_paste)
+    result['thermal_paste'] = user_thermal_paste
+    price -= float(user_thermal_paste["price_usd"])
+
+    # thermal paste
+
+    # webcam
+    user_webcam = select_rand (webcam)
+    result['webcam'] = user_webcam
+    price -= float(user_webcam["price_usd"])
+
+    # webcam
+
+    # wireless network card
+    user_wireless_network_card = select_rand (wireless_network_card)
+    result['wireless_network_card'] = user_wireless_network_card
+    price -= float(user_wireless_network_card["price_usd"])
+
+    # wireless network card
+    return {"Money_left": price, "data": result}
 
 
 
