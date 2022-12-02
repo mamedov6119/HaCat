@@ -3,26 +3,11 @@ pool:
 steps:
 - script: |
    npm install
-   
+   cd python_files
+   pip install requirements.txt
   displayName: 'Install Dependencies'
 
 - script: |
    npm run build
-   
   displayName: 'Build the Project'
 
-- task: CopyFiles@2
-  displayName: 'Copy Files'
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/dist'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- task: ArchiveFiles@2
-  displayName: 'Archive $(Build.ArtifactStagingDirectory)'
-  inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: staticvueweb'
-  inputs:
-    ArtifactName: staticvueweb
